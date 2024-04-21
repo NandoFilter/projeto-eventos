@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { Usuario } from "../../models";
 import { HttpStatus } from "../../utils/HttpStatus";
 
-export default async function EventosMiddleware(req: Request, res: Response, next: NextFunction) {
+export default async function UsuariosMiddleware(req: Request, res: Response, next: NextFunction) {
   const value = req.body as any;
 
   if (value) {
