@@ -5,7 +5,7 @@ import AuthMiddleware from "../middlewares/AuthMiddleware";
 const inscricoesRoutes = Router();
 
 inscricoesRoutes.get("/inscricoes/:id", AuthMiddleware, InscricoesController.getById);
-inscricoesRoutes.get("/inscricoes/usuario/:id", AuthMiddleware, InscricoesController.getById);
+inscricoesRoutes.get("/inscricoes/usuario/:id", AuthMiddleware, InscricoesController.getByUserId);
 inscricoesRoutes.post('/inscricoes', AuthMiddleware, InscricoesController.add)
 inscricoesRoutes.delete("/inscricoes/:id", AuthMiddleware, InscricoesController.delete);
 
