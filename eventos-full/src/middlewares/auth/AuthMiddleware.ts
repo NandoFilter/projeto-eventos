@@ -2,10 +2,14 @@ import { NextFunction, Request, Response } from "express";
 import { HttpStatus } from "../../utils/HttpStatus";
 
 export default async function AuthMiddleware(req: Request, res: Response, next: NextFunction) {
-  const bearerToken = req.headers.authorization;
+  const { user, pass } = req.headers;
 
-  if (!bearerToken || bearerToken !== `Bearer ${process.env.MAIN_TOKEN}`) {
-    return res.status(HttpStatus.UNAUTHORIZED).json({ error: 'Token de autorização não fornecido ou no formato inválido' });
+  if (!user || !pass) {
+    return res.status(HttpStatus.UNAUTHORIZED).json({ error: 'Credenciais não encontradas' });
+  }
+
+  if (user !== `${process.env.AUTH_USER}` || pass !== `${process.env.AUTH_PASS}`) {
+    return res.status(HttpStatus.UNAUTHORIZED).json({ error: 'Credenciais inválidas' });
   }
 
   next();

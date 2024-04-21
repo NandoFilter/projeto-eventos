@@ -27,7 +27,8 @@ export default class UsuariosController {
   private static createConfig(req: Request): AxiosRequestConfig {
     const config: AxiosRequestConfig = {
       headers: {
-        Authorization: `Bearer ${req.query.mainToken}`,
+        user: req.headers.user,
+        pass: req.headers.pass
       },
     };
 
