@@ -19,6 +19,14 @@ export default class InscricaosController {
     return res.json(inscricao);
   }
 
+  public static async getByUserId(req: Request, res: Response): Promise<Response<Inscricao[]>> {
+    const { id } = req.params;
+
+    const inscricao = await InscricaosController.rep.getByUserId(parseInt(id));
+
+    return res.json(inscricao);
+  }
+
   public static async add(req: Request, res: Response): Promise<Response<Inscricao>> {
     const inscricao = await InscricaosController.rep.add(req.body);
 

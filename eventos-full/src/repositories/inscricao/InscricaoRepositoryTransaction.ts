@@ -25,6 +25,16 @@ export class InscricaoRepositoryTransaction implements InscricaoRepository {
     return rows[0] ?? undefined;
   }
 
+  async getByUserId(id: number): Promise<Inscricao[]> {
+    const conn = await Database.getInstance().connect();
+
+    const [rows] = await conn.execute<Inscricao[]>(`SELECT * FROM ${TABLE_NAME} WHERE id_usuario = ?`, [id]);
+
+    conn.end()
+
+    return rows;
+  }
+
   async add(data: Inscricao): Promise<Inscricao> {
     const conn = await Database.getInstance().connect();
 

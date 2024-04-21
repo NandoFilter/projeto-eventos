@@ -4,7 +4,7 @@ import axios, { AxiosRequestConfig, AxiosError } from 'axios';
 
 export default class UsuariosController {
 
-  public static async add(req: Request, res: Response): Promise<Response<Usuario[]>> {
+  public static async add(req: Request, res: Response): Promise<Response<Usuario>> {
     const config: AxiosRequestConfig = UsuariosController.createConfig(req);
 
     try {
