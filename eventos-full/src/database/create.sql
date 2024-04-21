@@ -39,3 +39,13 @@ CREATE TABLE inscricoes
     constraint inscricoes_usuario_fk
         foreign key (id_usuario) references usuarios (id)
 );
+
+-- --------------------------------------------------------
+-- Table structure for table 'LOGS'
+-- --------------------------------------------------------
+CREATE TABLE logs
+(
+    operation text     null,
+    route     text     not null,
+    data_hora datetime not null
+);
