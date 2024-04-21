@@ -1,0 +1,1 @@
+export { default as InscricaoStatus } from './InscricaoStatus'

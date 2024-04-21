@@ -1,6 +1,4 @@
-import { RowDataPacket } from "mysql2"
-
-interface Inscricao extends RowDataPacket {
+interface Inscricao {
   id: number,
   id_evento: number,
   id_usuario: number,

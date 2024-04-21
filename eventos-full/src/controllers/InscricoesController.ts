@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Inscricao } from "../models";
 import { InscricaoRepositoryTransaction } from '../repositories/inscricao/InscricaoRepositoryTransaction';
+import { InscricaoStatus } from "../enums";
 
 export default class InscricaosController {
   private static rep = new InscricaoRepositoryTransaction();
@@ -33,10 +34,20 @@ export default class InscricaosController {
     return res.json(inscricao);
   }
 
-  public static async update(req: Request, res: Response): Promise<Response<Inscricao>> {
-    const { id } = req.params;
+  public static async confirm(req: Request, res: Response): Promise<Response<Inscricao>> {
+    const inscricao = await InscricaosController.rep.update(InscricaoStatus.CONFIRMED, req.body);
 
-    const inscricao = await InscricaosController.rep.update(parseInt(id), req.body);
+    return res.json(inscricao)
+  }
+
+  public static async checkIn(req: Request, res: Response): Promise<Response<Inscricao>> {
+    const inscricao = await InscricaosController.rep.update(InscricaoStatus.CHECK_IN_DONE, req.body);
+
+    return res.json(inscricao)
+  }
+
+  public static async cancel(req: Request, res: Response): Promise<Response<Inscricao>> {
+    const inscricao = await InscricaosController.rep.update(InscricaoStatus.CANCELED, req.body);
 
     return res.json(inscricao)
   }

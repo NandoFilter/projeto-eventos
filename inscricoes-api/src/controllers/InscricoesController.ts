@@ -68,6 +68,18 @@ export default class InscricoesController {
     }
   }
 
+  public static async confirm(req: Request, res: Response): Promise<Response<Inscricao>> {
+    return InscricoesController.changeStatus(req, res, 'confirm')
+  }
+
+  public static async checkIn(req: Request, res: Response): Promise<Response<Inscricao>> {
+    return InscricoesController.changeStatus(req, res, 'checkIn')
+  }
+
+  public static async cancel(req: Request, res: Response): Promise<Response<Inscricao>> {
+    return InscricoesController.changeStatus(req, res, 'cancel')
+  }
+
   public static async delete(req: Request, res: Response): Promise<Response<Inscricao>> {
     const { id } = req.params;
 
@@ -99,5 +111,25 @@ export default class InscricoesController {
     };
 
     return config
+  }
+
+  private static async changeStatus(req: Request, res: Response, path: string): Promise<Response<Inscricao>> {
+    const config: AxiosRequestConfig = InscricoesController.createConfig(req);
+
+    try {
+      const response = await axios.put(`${process.env.FULL_API_URL}/inscricoes/${path}`, req.body, config);
+
+      return res.json(response.data);
+    }
+
+    catch (error) {
+      const err = error as AxiosError;
+
+      if (err.response && err.response.data) {
+        return res.status(err.response.status).json(err.response.data)
+      }
+
+      return res.json(error)
+    }
   }
 }

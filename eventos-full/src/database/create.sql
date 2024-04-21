@@ -33,6 +33,7 @@ CREATE TABLE inscricoes
     id_evento  int      not null,
     id_usuario int      not null,
     data_hora  datetime not null,
+    status  int not null,
     constraint inscricoes_evento_fk
         foreign key (id_evento) references eventos (id),
     constraint inscricoes_usuario_fk
