@@ -9,7 +9,7 @@ export default async function EventosMiddleware(req: Request, res: Response, nex
     let { nome, data_hora } = value as Evento;
 
     if (!nome) return res.status(HttpStatus.BAD_REQUEST).json({ error: 'Nome inválido' });
-    if (!data_hora) return res.status(HttpStatus.BAD_REQUEST).json({ error: 'Data inválido' });
+    if (!data_hora) return res.status(HttpStatus.BAD_REQUEST).json({ error: 'Data inválida' });
 
     next();
   } else {
