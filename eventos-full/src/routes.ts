@@ -1,9 +1,11 @@
 import { Router } from 'express'
 
-import eventosRoutes from "./routes/EventosRoutes";
+import EventosRoutes from "./routes/EventosRoutes";
+import UsuarioRoutes from "./routes/UsuarioRoutes";
 
 const routes = Router();
 
-routes.use(eventosRoutes);
+routes.use(EventosRoutes);
+routes.use(UsuarioRoutes);
 
 export default routes;

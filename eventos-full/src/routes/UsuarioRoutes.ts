@@ -1,0 +1,14 @@
+import { Router } from "express";
+import { UsuariosController } from "../controllers";
+import UsuariosMiddleware from "../middlewares/usuarios/UsuariosMiddleware";
+import AuthMiddleware from "../middlewares/auth/AuthMiddleware";
+
+const usuariosRoutes = Router();
+
+usuariosRoutes.get('/usuarios', AuthMiddleware, UsuariosController.findAll)
+usuariosRoutes.get("/usuarios/:id", AuthMiddleware, UsuariosController.getById);
+usuariosRoutes.post("/usuarios", AuthMiddleware, UsuariosMiddleware, UsuariosController.add);
+usuariosRoutes.put("/usuarios/:id", AuthMiddleware, UsuariosMiddleware, UsuariosController.update);
+usuariosRoutes.delete("/usuarios/:id", AuthMiddleware, UsuariosController.delete);
+
+export default usuariosRoutes;

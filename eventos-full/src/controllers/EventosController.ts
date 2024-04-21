@@ -1,13 +1,12 @@
 import { Request, Response } from "express";
 import { Evento } from "../models";
 import { EventoRepositoryTransaction } from '../repositories/evento/EventoRepositoryTransaction';
-import { HttpStatus } from "../utils/HttpStatus";
 
 export default class EventosController {
-  private static eventoRepo = new EventoRepositoryTransaction();
+  private static rep = new EventoRepositoryTransaction();
 
   public static async findAll(req: Request, res: Response): Promise<Response<Evento[]>> {
-    const eventos = await EventosController.eventoRepo.findAll();
+    const eventos = await EventosController.rep.findAll();
 
     return res.json(eventos);
   }
@@ -15,13 +14,13 @@ export default class EventosController {
   public static async getById(req: Request, res: Response): Promise<Response<Evento>> {
     const { id } = req.params;
 
-    const evento = await EventosController.eventoRepo.getById(parseInt(id));
+    const evento = await EventosController.rep.getById(parseInt(id));
 
     return res.json(evento);
   }
 
-  public static async add(req: Request, res: Response): Promise<any> {
-    const evento = await EventosController.eventoRepo.add(req.body);
+  public static async add(req: Request, res: Response): Promise<Response<Evento>> {
+    const evento = await EventosController.rep.add(req.body);
 
     return res.json(evento);
   }
@@ -29,7 +28,7 @@ export default class EventosController {
   public static async update(req: Request, res: Response): Promise<Response<Evento>> {
     const { id } = req.params;
 
-    const evento = await EventosController.eventoRepo.update(parseInt(id), req.body);
+    const evento = await EventosController.rep.update(parseInt(id), req.body);
 
     return res.json(evento)
   }
@@ -37,8 +36,8 @@ export default class EventosController {
   public static async delete(req: Request, res: Response): Promise<Response<Evento>> {
     const { id } = req.params;
 
-    await EventosController.eventoRepo.delete(parseInt(id));
+    await EventosController.rep.delete(parseInt(id));
 
-    return res.status(HttpStatus.OK).send("Evento excluído com sucesso").end();
+    return res.send("Evento excluído com sucesso").end();
   }
 }
