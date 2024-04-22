@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "server.ts",
   "scripts": {
-    "dev": "tsnd --quiet --debug --inspect -- ./src/server.ts"
+    "dev": "tsnd --quiet --debug --inspect -- ./src/server.ts",
+    "swagger": "tsnd ./src/swagger.ts"
   },
   "author": "NandoFilter",
   "license": "ISC",
@@ -18,10 +19,8 @@
     "ts-node-dev": "^2.0.0"
   },
   "devDependencies": {
-    "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
-    "@types/jsonwebtoken": "^8.5.8",
     "@types/node": "^18.0.3",
     "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
@@ -31,6 +30,7 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-promise": "^6.0.0",
+    "swagger-autogen": "^2.23.7",
     "typescript": "^5.4.5"
   },
   "keywords": [],

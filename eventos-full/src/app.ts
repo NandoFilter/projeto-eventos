@@ -4,6 +4,8 @@ import dotenv from 'dotenv'
 
 import routes from './routes'
 
+//import swaggerFile from './swagger_output.json'
+
 class App {
   public express: express.Application
 
@@ -22,6 +24,7 @@ class App {
 
   private routes(): void {
     this.express.use(routes)
+    //this.express.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
   }
 }
 
