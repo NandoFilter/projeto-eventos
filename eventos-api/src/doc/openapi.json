@@ -1,0 +1,133 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Eventos API",
+    "description": "API de Autenticação de Eventos para o trabalho final de Arquitetura de Software - 2024A",
+    "contact": {
+      "email": "fernando.filter@universo.univates.br"
+    },
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "eventos",
+      "description": "Tudo sobre os eventos"
+    }
+  ],
+  "paths": {
+    "/eventos": {
+      "get": {
+        "tags": [
+          "eventos"
+        ],
+        "summary": "Busca todos os eventos",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Evento"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/eventos/{id}": {
+      "get": {
+        "tags": [
+          "eventos"
+        ],
+        "summary": "Busca um evento pelo ID",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do Evento",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Evento"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Evento": {
+        "required": [
+          "nome",
+          "data_hora"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "nome": {
+            "type": "string",
+            "example": "Festa do Juca Bala"
+          },
+          "data_hora": {
+            "type": "string",
+            "example": "2024-03-01T20:30:00.000Z"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "responses": {
+      "UnauthorizedError": {
+        "description": "Token de autorização não fornecido ou no formato inválido"
+      }
+    }
+  }
+}
