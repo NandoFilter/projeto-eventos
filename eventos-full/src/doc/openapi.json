@@ -1,0 +1,773 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Eventos Full API",
+    "description": "API principal do trabalho final de Arquitetura de Software - 2024A",
+    "contact": {
+      "email": "fernando.filter@universo.univates.br"
+    },
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "eventos",
+      "description": "Tudo sobre os eventos"
+    },
+    {
+      "name": "usuarios",
+      "description": "Tudo sobre os usuários"
+    },
+    {
+      "name": "inscricoes",
+      "description": "Tudo sobre as inscrições"
+    }
+  ],
+  "paths": {
+    "/eventos": {
+      "get": {
+        "tags": [
+          "eventos"
+        ],
+        "summary": "Busca todos os eventos",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Evento"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "security": [
+          {
+            "headerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "eventos"
+        ],
+        "summary": "Adiciona um evento",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Evento"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "security": [
+          {
+            "headerAuth": []
+          }
+        ]
+      }
+    },
+    "/eventos/{id}": {
+      "get": {
+        "tags": [
+          "eventos"
+        ],
+        "summary": "Busca um evento pelo ID",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do Evento",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Evento"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "security": [
+          {
+            "headerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "eventos"
+        ],
+        "summary": "Edita um evento",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do Evento",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Evento"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "security": [
+          {
+            "headerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "eventos"
+        ],
+        "summary": "Deleta um evento",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do Evento",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "security": [
+          {
+            "headerAuth": []
+          }
+        ]
+      }
+    },
+    "/usuarios": {
+      "get": {
+        "tags": [
+          "usuarios"
+        ],
+        "summary": "Busca todos os usuários",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Usuario"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "security": [
+          {
+            "headerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "usuarios"
+        ],
+        "summary": "Adiciona um usuário",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Usuario"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "security": [
+          {
+            "headerAuth": []
+          }
+        ]
+      }
+    },
+    "/usuarios/{id}": {
+      "get": {
+        "tags": [
+          "usuarios"
+        ],
+        "summary": "Busca um usuário pelo ID",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do Usuário",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Usuario"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "security": [
+          {
+            "headerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "usuarios"
+        ],
+        "summary": "Edita um usuário",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do Usuário",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Usuario"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "security": [
+          {
+            "headerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "usuarios"
+        ],
+        "summary": "Deleta um usuário",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do Usuário",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "security": [
+          {
+            "headerAuth": []
+          }
+        ]
+      }
+    },
+    "/inscricoes": {
+      "get": {
+        "tags": [
+          "inscricoes"
+        ],
+        "summary": "Busca todas as inscrições",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Inscricao"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "security": [
+          {
+            "headerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "inscricoes"
+        ],
+        "summary": "Adiciona uma inscrição",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Inscricao"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "security": [
+          {
+            "headerAuth": []
+          }
+        ]
+      }
+    },
+    "/inscricoes/{id}": {
+      "get": {
+        "tags": [
+          "inscricoes"
+        ],
+        "summary": "Busca uma inscrição pelo ID",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da Inscrição",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Inscricao"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "security": [
+          {
+            "headerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "inscricoes"
+        ],
+        "summary": "Deleta uma inscrição",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da Inscrição",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "security": [
+          {
+            "headerAuth": []
+          }
+        ]
+      }
+    },
+    "/inscricoes/usuario/{id}": {
+      "get": {
+        "tags": [
+          "inscricoes"
+        ],
+        "summary": "Busca todas as inscrições de um Usuário",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do Usuário",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Inscricao"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "security": [
+          {
+            "headerAuth": []
+          }
+        ]
+      }
+    },
+    "/inscricoes/confirm": {
+      "put": {
+        "tags": [
+          "inscricoes"
+        ],
+        "summary": "Muda o status da Inscrição para Confirmado",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Inscricao"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "security": [
+          {
+            "headerAuth": []
+          }
+        ]
+      }
+    },
+    "/inscricoes/checkIn": {
+      "put": {
+        "tags": [
+          "inscricoes"
+        ],
+        "summary": "Muda o status da Inscrição para Check In",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Inscricao"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "security": [
+          {
+            "headerAuth": []
+          }
+        ]
+      }
+    },
+    "/inscricoes/cancel": {
+      "put": {
+        "tags": [
+          "inscricoes"
+        ],
+        "summary": "Muda o status da Inscrição para Cancelado",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Inscricao"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "security": [
+          {
+            "headerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Evento": {
+        "required": [
+          "nome",
+          "data_hora"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "nome": {
+            "type": "string",
+            "example": "Festa do Juca Bala"
+          },
+          "data_hora": {
+            "type": "string",
+            "example": "2024-03-01T20:30:00.000Z"
+          }
+        }
+      },
+      "Usuario": {
+        "required": [
+          "nome",
+          "email",
+          "senha"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "nome": {
+            "type": "string",
+            "example": "Fernando"
+          },
+          "email": {
+            "type": "string",
+            "example": "fernandohfilter@gmail.com"
+          },
+          "senha": {
+            "type": "string",
+            "example": "admin123"
+          }
+        }
+      },
+      "Inscricao": {
+        "required": [
+          "id_evento",
+          "id_usuario"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "id_evento": {
+            "type": "integer",
+            "example": 2
+          },
+          "id_usuario": {
+            "type": "integer",
+            "example": 3
+          },
+          "data_hora": {
+            "type": "string",
+            "example": "2024-03-01T20:30:00.000Z"
+          },
+          "status": {
+            "type": "integer",
+            "enum": [
+              0,
+              1,
+              2,
+              3
+            ]
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "headerAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    },
+    "responses": {
+      "UnauthorizedError": {
+        "description": "Credenciais não encontradas ou inválidas"
+      }
+    }
+  }
+}
