@@ -42,7 +42,7 @@
         },
         "security": [
           {
-            "headerAuth": []
+            "bearerAuth": []
           }
         ]
       }
