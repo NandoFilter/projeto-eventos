@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { Evento } from "../models";
 import { EventoRepositoryTransaction } from '../repositories/evento/EventoRepositoryTransaction';
 import { LogRepositoryTransaction } from "../repositories/logs/LogRepositoryTransaction";
+import { HttpStatus } from "../utils/HttpStatus";
 
 export default class EventosController {
   private static rep = new EventoRepositoryTransaction();
@@ -20,9 +21,13 @@ export default class EventosController {
 
     const evento = await EventosController.rep.getById(parseInt(id));
 
-    if (evento) await EventosController.log.add(req.method, req.originalUrl)
+    if (evento) {
+      await EventosController.log.add(req.method, req.originalUrl)
 
-    return res.json(evento);
+      return res.json(evento);
+    }
+
+    return res.status(HttpStatus.NOT_FOUND).end();
   }
 
   public static async add(req: Request, res: Response): Promise<Response<Evento>> {

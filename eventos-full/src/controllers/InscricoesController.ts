@@ -3,6 +3,7 @@ import { Inscricao } from "../models";
 import { InscricaoRepositoryTransaction } from '../repositories/inscricao/InscricaoRepositoryTransaction';
 import { InscricaoStatus } from "../enums";
 import { LogRepositoryTransaction } from "../repositories/logs/LogRepositoryTransaction";
+import { HttpStatus } from "../utils/HttpStatus";
 
 export default class InscricaosController {
   private static rep = new InscricaoRepositoryTransaction();
@@ -21,19 +22,27 @@ export default class InscricaosController {
 
     const inscricao = await InscricaosController.rep.getById(parseInt(id));
 
-    if (inscricao) await InscricaosController.log.add(req.method, req.originalUrl)
+    if (inscricao) {
+      await InscricaosController.log.add(req.method, req.originalUrl)
 
-    return res.json(inscricao);
+      return res.json(inscricao);
+    }
+
+    return res.status(HttpStatus.NOT_FOUND).end();
   }
 
   public static async getByUserId(req: Request, res: Response): Promise<Response<Inscricao[]>> {
     const { id } = req.params;
 
-    const inscricao = await InscricaosController.rep.getByUserId(parseInt(id));
+    const inscricoes = await InscricaosController.rep.getByUserId(parseInt(id));
 
-    if (inscricao) await InscricaosController.log.add(req.method, req.originalUrl)
+    if (inscricoes && inscricoes.length > 0) {
+      await InscricaosController.log.add(req.method, req.originalUrl)
 
-    return res.json(inscricao);
+      return res.json(inscricoes);
+    }
+
+    return res.status(HttpStatus.NOT_FOUND).end();
   }
 
   public static async add(req: Request, res: Response): Promise<Response<Inscricao>> {

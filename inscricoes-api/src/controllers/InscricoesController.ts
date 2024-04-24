@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Inscricao } from "../models";
 import axios, { AxiosRequestConfig, AxiosError } from 'axios';
+import { HttpStatus } from "../utils/HttpStatus";
 
 export default class InscricoesController {
 
@@ -18,11 +19,13 @@ export default class InscricoesController {
     catch (error) {
       const err = error as AxiosError;
 
-      if (err.response && err.response.data) {
-        return res.status(err.response.status).json(err.response.data)
+      if (err.response) {
+        let data = err.response.data ? err.response.data : error
+
+        return res.status(err.response.status).json(data)
       }
 
-      return res.json(error)
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(error)
     }
   }
 
@@ -40,11 +43,13 @@ export default class InscricoesController {
     catch (error) {
       const err = error as AxiosError;
 
-      if (err.response && err.response.data) {
-        return res.status(err.response.status).json(err.response.data)
+      if (err.response) {
+        let data = err.response.data ? err.response.data : error
+
+        return res.status(err.response.status).json(data)
       }
 
-      return res.json(error)
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(error)
     }
   }
 
@@ -61,10 +66,12 @@ export default class InscricoesController {
       const err = error as AxiosError;
 
       if (err.response && err.response.data) {
-        return res.status(err.response.status).json(err.response.data)
+        let data = err.response.data ? err.response.data : error
+
+        return res.status(err.response.status).json(data)
       }
 
-      return res.json(error)
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(error)
     }
   }
 
@@ -94,11 +101,13 @@ export default class InscricoesController {
     catch (error) {
       const err = error as AxiosError;
 
-      if (err.response && err.response.data) {
-        return res.status(err.response.status).json(err.response.data)
+      if (err.response) {
+        let data = err.response.data ? err.response.data : error
+
+        return res.status(err.response.status).json(data)
       }
 
-      return res.json(error)
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(error)
     }
   }
 
@@ -125,11 +134,13 @@ export default class InscricoesController {
     catch (error) {
       const err = error as AxiosError;
 
-      if (err.response && err.response.data) {
-        return res.status(err.response.status).json(err.response.data)
+      if (err.response) {
+        let data = err.response.data ? err.response.data : error
+
+        return res.status(err.response.status).json(data)
       }
 
-      return res.json(error)
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(error)
     }
   }
 }
