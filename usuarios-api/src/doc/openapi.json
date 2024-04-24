@@ -1,0 +1,92 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Usuários API",
+    "description": "API de Autenticação de Usuários para o trabalho final de Arquitetura de Software - 2024A",
+    "contact": {
+      "email": "fernando.filter@universo.univates.br"
+    },
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "usuarios",
+      "description": "Tudo sobre os usuários"
+    }
+  ],
+  "paths": {
+    "/usuarios": {
+      "post": {
+        "tags": [
+          "usuarios"
+        ],
+        "summary": "Adiciona um usuário",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Usuario"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "security": [
+          {
+            "headerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Usuario": {
+        "required": [
+          "nome",
+          "email",
+          "senha"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "nome": {
+            "type": "string",
+            "example": "Fernando"
+          },
+          "email": {
+            "type": "string",
+            "example": "fernandohfilter@gmail.com"
+          },
+          "senha": {
+            "type": "string",
+            "example": "admin123"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "responses": {
+      "UnauthorizedError": {
+        "description": "Token de autorização não fornecido ou no formato inválido"
+      }
+    }
+  }
+}
