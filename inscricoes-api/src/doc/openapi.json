@@ -15,11 +15,39 @@
     }
   ],
   "paths": {
+    "/inscricoes": {
+      "post": {
+        "tags": ["inscricoes"],
+        "summary": "Adiciona uma inscrição",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Inscricao"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      }
+    },
     "/inscricoes/{id}": {
       "get": {
-        "tags": [
-          "inscricoes"
-        ],
+        "tags": ["inscricoes"],
         "summary": "Busca uma inscrição pelo ID",
         "description": "Multiple status values can be provided with comma separated strings",
         "parameters": [
@@ -58,9 +86,7 @@
         ]
       },
       "delete": {
-        "tags": [
-          "inscricoes"
-        ],
+        "tags": ["inscricoes"],
         "summary": "Deleta uma inscrição",
         "description": "Multiple status values can be provided with comma separated strings",
         "parameters": [
@@ -94,9 +120,7 @@
     },
     "/inscricoes/usuario/{id}": {
       "get": {
-        "tags": [
-          "inscricoes"
-        ],
+        "tags": ["inscricoes"],
         "summary": "Busca todas as inscrições de um Usuário",
         "description": "Multiple status values can be provided with comma separated strings",
         "parameters": [
@@ -140,9 +164,7 @@
     },
     "/inscricoes/confirm": {
       "put": {
-        "tags": [
-          "inscricoes"
-        ],
+        "tags": ["inscricoes"],
         "summary": "Muda o status da Inscrição para Confirmado",
         "description": "Multiple status values can be provided with comma separated strings",
         "responses": {
@@ -172,9 +194,7 @@
     },
     "/inscricoes/checkIn": {
       "put": {
-        "tags": [
-          "inscricoes"
-        ],
+        "tags": ["inscricoes"],
         "summary": "Muda o status da Inscrição para Check In",
         "description": "Multiple status values can be provided with comma separated strings",
         "responses": {
@@ -204,9 +224,7 @@
     },
     "/inscricoes/cancel": {
       "put": {
-        "tags": [
-          "inscricoes"
-        ],
+        "tags": ["inscricoes"],
         "summary": "Muda o status da Inscrição para Cancelado",
         "description": "Multiple status values can be provided with comma separated strings",
         "responses": {
@@ -238,10 +256,7 @@
   "components": {
     "schemas": {
       "Inscricao": {
-        "required": [
-          "id_evento",
-          "id_usuario"
-        ],
+        "required": ["id_evento", "id_usuario"],
         "type": "object",
         "properties": {
           "id": {
@@ -262,12 +277,7 @@
           },
           "status": {
             "type": "integer",
-            "enum": [
-              0,
-              1,
-              2,
-              3
-            ]
+            "enum": [0, 1, 2, 3]
           }
         }
       }
