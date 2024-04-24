@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { Usuario } from "../models";
 import { UsuarioRepositoryTransaction } from '../repositories/usuario/UsuarioRepositoryTransaction';
 import { LogRepositoryTransaction } from "../repositories/logs/LogRepositoryTransaction";
+import { HttpStatus } from "../utils/HttpStatus";
 
 export default class UsuariosController {
   private static rep = new UsuarioRepositoryTransaction();
@@ -20,9 +21,13 @@ export default class UsuariosController {
 
     const usuario = await UsuariosController.rep.getById(parseInt(id));
 
-    if (usuario) await UsuariosController.log.add(req.method, req.originalUrl)
+    if (usuario) {
+      await UsuariosController.log.add(req.method, req.originalUrl)
 
-    return res.json(usuario);
+      return res.json(usuario);
+    }
+
+    return res.status(HttpStatus.NOT_FOUND).end();
   }
 
   public static async add(req: Request, res: Response): Promise<Response<Usuario>> {
@@ -31,6 +36,20 @@ export default class UsuariosController {
     if (usuario) await UsuariosController.log.add(req.method, req.originalUrl)
 
     return res.json(usuario);
+  }
+
+  public static async auth(req: Request, res: Response): Promise<Response<Usuario>> {
+    const { email, senha } = req.body;
+
+    const usuario = await UsuariosController.rep.getUserByLogin(email, senha);
+
+    if (usuario) {
+      await UsuariosController.log.add(req.method, req.originalUrl)
+
+      return res.json({ message: 'Usuário logado com sucesso', usuario });
+    }
+
+    return res.status(HttpStatus.NOT_FOUND).end();
   }
 
   public static async update(req: Request, res: Response): Promise<Response<Usuario>> {

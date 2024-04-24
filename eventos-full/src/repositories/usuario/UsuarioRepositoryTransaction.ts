@@ -25,6 +25,18 @@ export class UsuarioRepositoryTransaction implements UsuarioRepository {
     return rows[0] ?? undefined;
   }
 
+  async getUserByLogin(email: string, senha: string): Promise<Usuario> {
+    const conn = await Database.getInstance().connect();
+
+    const [rows] = await conn.execute<Usuario[]>(`SELECT * FROM ${TABLE_NAME} WHERE email = ? AND senha = ?`,
+      [email, senha]
+    );
+
+    conn.end()
+
+    return rows[0] ?? undefined;
+  }
+
   async add(data: Usuario): Promise<Usuario> {
     const conn = await Database.getInstance().connect();
 

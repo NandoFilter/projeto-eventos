@@ -36,6 +36,9 @@
           },
           "401": {
             "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         },
         "security": [
@@ -77,6 +80,9 @@
           },
           "401": {
             "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         },
         "security": [
@@ -109,6 +115,9 @@
           },
           "401": {
             "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         },
         "security": [
@@ -153,6 +162,9 @@
           },
           "401": {
             "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         },
         "security": [
@@ -183,6 +195,9 @@
           },
           "401": {
             "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         },
         "security": [
@@ -213,6 +228,9 @@
           },
           "401": {
             "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         },
         "security": [
@@ -243,6 +261,9 @@
           },
           "401": {
             "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         },
         "security": [

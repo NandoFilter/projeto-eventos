@@ -38,6 +38,44 @@
           },
           "401": {
             "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/usuarios/auth": {
+      "post": {
+        "tags": [
+          "usuarios"
+        ],
+        "summary": "Realiza o login de um usuário",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Login"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         },
         "security": [
@@ -73,6 +111,40 @@
           "senha": {
             "type": "string",
             "example": "admin123"
+          }
+        }
+      },
+      "Login": {
+        "required": [
+          "email",
+          "senha"
+        ],
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Usuário logado com sucesso"
+          },
+          "usuario": {
+            "type": "object",
+            "example": {
+              "id": {
+                "type": "integer",
+                "example": 1
+              },
+              "nome": {
+                "type": "string",
+                "example": "Fernando"
+              },
+              "email": {
+                "type": "string",
+                "example": "fernandohfilter@gmail.com"
+              },
+              "senha": {
+                "type": "string",
+                "example": "admin123"
+              }
+            }
           }
         }
       }
